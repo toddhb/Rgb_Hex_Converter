@@ -50,11 +50,20 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
+		//hexadecimal input field
 		textFieldHex = new JTextField();
 		textFieldHex.setToolTipText("Enter a hexadecimal value");
 		textFieldHex.addActionListener(this);
 		textFieldHex.setEditable(true);
+		textFieldHex.addMouseListener(new MouseAdapter(){
+	        @Override
+	        public void mouseClicked(MouseEvent e){
+	            textFieldRgb.setText("");
+	        }
+	    });
 		
+		//convert button; when action performed,
+		//between color types
 		btnConvert = new JButton("Convert");
 		btnConvert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,10 +89,17 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
                 KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true),
                 JComponent.WHEN_FOCUSED);*/
 		
+		//RGB input field
 		textFieldRgb = new JTextField();
 		textFieldRgb.setToolTipText("Enter an RGB value");
 		textFieldRgb.addActionListener(this);
 		textFieldRgb.setEditable(true);
+		textFieldRgb.addMouseListener(new MouseAdapter(){
+	        @Override
+	        public void mouseClicked(MouseEvent e){
+	            textFieldHex.setText("");
+	        }
+	    });
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -120,20 +136,6 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 					.addGap(28))
 		);
 		contentPane.setLayout(gl_contentPane);
-		
-		textFieldRgb.addMouseListener(new MouseAdapter(){
-	        @Override
-	        public void mouseClicked(MouseEvent e){
-	            textFieldHex.setText("");
-	        }
-	    });
-		
-		textFieldHex.addMouseListener(new MouseAdapter(){
-	        @Override
-	        public void mouseClicked(MouseEvent e){
-	            textFieldRgb.setText("");
-	        }
-	    });
 	}
 
 	public void processConversion(String inputHexValue, String inputRgbValue) {
