@@ -139,8 +139,11 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 	}
 
 	public void processConversion(String inputHexValue, String inputRgbValue) {
-		System.out.println("inputHexValue: " + inputHexValue);
-		System.out.println("inputRgbValue: " + inputRgbValue);
+		Rgb inputRgb = new Rgb(inputRgbValue);
+		textFieldRgb.setText(inputRgb.convert());
+
+		Hex inputHex = new Hex(inputHexValue);
+		textFieldHex.setText(inputHex.convert());
 	}
 
 	public void mouseClicked(MouseEvent e) {
