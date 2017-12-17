@@ -1,7 +1,7 @@
 package hexRGBConverter;
 
 public abstract class Color {
-	private String value;
+	protected String value;
 	
 	public Color (String input) {
 		value = input;
