@@ -7,10 +7,27 @@ public class Hex extends Color {
 		// TODO Auto-generated constructor stub
 	}
 
+	String parsedValue;
+
 	@Override
 	String convert() {
-		// TODO Auto-generated method stub
-		return "hex!";
+		String rgbValue = "";
+
+		if(!value.equals("")) {
+			//parse the input value so that it becomes a well-formed hexadecimal representation
+			parse();
+			//after parsing, convert the hex to RGB
+			//rgbValue = value + "rgb!";//TODO
+			//then fill the RGB field with the converted value
+			GUI.setText(GUI.textFieldRgb, rgbValue);
+		}
+		//preserve the original hex input
+		return value;
+	}
+
+	@Override
+	void parse() {
+		//TODO
 	}
 
 }
