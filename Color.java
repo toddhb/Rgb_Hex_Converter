@@ -16,4 +16,5 @@ public abstract class Color {
 	}
 	
 	abstract String convert();
+	abstract void parse();
 }
