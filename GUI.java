@@ -24,7 +24,9 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 	String rgbValue;
 	
 	private JPanel contentPane;
-	private JTextField textFieldHex, textFieldRgb;
+	public static JTextField textFieldHex;
+
+	public static JTextField textFieldRgb;
 	private JButton btnConvert;
 
 	public GUI() {
@@ -142,8 +144,9 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 		Rgb inputRgb = new Rgb(inputRgbValue);
 		textFieldRgb.setText(inputRgb.convert());
 
-		Hex inputHex = new Hex(inputHexValue);
-		textFieldHex.setText(inputHex.convert());
+		//TODO: AVOID TIMING CONFLICT WHERE RGB PROCESSES BEFORE HEX
+		/*Hex inputHex = new Hex(inputHexValue);
+		textFieldHex.setText(inputHex.convert());*/
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -174,5 +177,9 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public static void setText(JTextField field, String string) {
+		field.setText(string);
 	}
 }
