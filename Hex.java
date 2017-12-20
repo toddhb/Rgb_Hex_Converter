@@ -1,6 +1,8 @@
 package hexRGBConverter;
 
-public class Hex extends Color {
+import java.awt.Color;
+
+public class Hex extends _Color {
 
 	public Hex(String input) {
 		super(input);
@@ -11,23 +13,30 @@ public class Hex extends Color {
 
 	@Override
 	String convert() {
+		Color color;
 		String rgbValue = "";
 
 		if(!value.equals("")) {
 			//parse the input value so that it becomes a well-formed hexadecimal representation
 			parse();
 			//after parsing, convert the hex to RGB
-			//rgbValue = value + "rgb!";//TODO
-			//then fill the RGB field with the converted value
-			GUI.setText(GUI.textFieldRgb, rgbValue);
+			color = Color.decode(parsedValue);
+			rgbValue = "rgb(" + color.getRed() + "," + color.getGreen() + "," + color.getBlue() + ")";
 		}
-		//preserve the original hex input
-		return value;
+		return rgbValue;
 	}
 
 	@Override
 	void parse() {
-		//TODO
+		//TODO: MORE PARSING
+		//IF STRING DOES NOT START WITH 0X OR 0x
+		//IF STRING DOES NOT REPRESENT VALID HEX CHARS
+		if(value.substring(0,1).equals("#")) {
+			parsedValue = "0x" + value.substring(1, value.length());//replace a leading # char with 0x
+		}
+		if (!value.substring(0,2).equals("0x") || !value.substring(0,2).equals("0X")) {
+			parsedValue = "0x" + value;//prepend a 0x
+		}
 	}
 
 }
