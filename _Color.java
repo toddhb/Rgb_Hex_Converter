@@ -1,9 +1,10 @@
 package hexRGBConverter;
 
-public abstract class Color {
-	protected String value;
+public abstract class _Color {
+
+protected String value;
 	
-	public Color (String input) {
+	public _Color (String input) {
 		value = input;
 	}
 	
@@ -17,4 +18,5 @@ public abstract class Color {
 	
 	abstract String convert();
 	abstract void parse();
+
 }
