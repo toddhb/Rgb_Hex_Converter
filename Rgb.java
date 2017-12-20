@@ -1,6 +1,6 @@
 package hexRGBConverter;
 
-public class Rgb extends Color {
+public class Rgb extends _Color {
 	public Rgb(String input) {
 		super(input);
 		// TODO Auto-generated constructor stub
@@ -16,19 +16,16 @@ public class Rgb extends Color {
 			//parse the input value so that it becomes a well-formed RGB
 			parse();
 			//after parsing, convert the RGB to hexadecimal
-			hexValue = String.format("#%02X%02X%02X", Integer.parseInt(r), Integer.parseInt(g), Integer.parseInt(b));
-			//then fill the Hex field with the converted value
-			GUI.setText(GUI.textFieldHex, hexValue);
+			hexValue = String.format("0x%02X%02X%02X", Integer.parseInt(r), Integer.parseInt(g), Integer.parseInt(b));
 		}
-		//preserve the original RGB input
-		return value;
+		return hexValue;
 	}
 
 	@Override
 	void parse() {
 		parsedValue = value.trim();//trim leading and trailing whitespace
 		parsedValue = parsedValue.replaceAll("\\s+", "");//ignore all other whitespaces
-		//TODO: more parsing
+		//TODO: MORE PARSING, such as ignore r,g,b,(,)
 		r = parsedValue.split(",")[0];
 		if (r.length() > 3) {
 			r = r.substring(0, 2);//only take first 3 digits
