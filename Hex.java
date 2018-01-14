@@ -10,10 +10,11 @@ public class Hex extends _Color {
 	}
 
 	String parsedValue;
+	Color color;
 
 	@Override
 	String convert() {
-		Color color;
+
 		String rgbValue = "";
 
 		if(!value.equals("")) {
@@ -37,6 +38,21 @@ public class Hex extends _Color {
 		if (!value.substring(0,2).equals("0x") || !value.substring(0,2).equals("0X")) {
 			parsedValue = "0x" + value;//prepend a 0x
 		}
+	}
+
+	@Override
+	int getRed() {
+		return color.getRed();
+	}
+
+	@Override
+	int getGreen() {
+		return color.getGreen();
+	}
+
+	@Override
+	int getBlue() {
+		return color.getBlue();
 	}
 
 }

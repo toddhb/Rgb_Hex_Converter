@@ -25,9 +25,9 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 	
 	private JPanel contentPane;
 	public static JTextField textFieldHex;
-
 	public static JTextField textFieldRgb;
 	private JButton btnConvert;
+	private JTextField colorBox;
 
 	public GUI() {
 		initializeGUI();
@@ -80,16 +80,6 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 				}
 			}
 		});
-        
-		/*btnConvert.registerKeyboardAction(btnConvert.getActionForKeyStroke(
-				KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0, false)),
-                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false),
-                JComponent.WHEN_FOCUSED);
-
-		btnConvert.registerKeyboardAction(btnConvert.getActionForKeyStroke(
-                KeyStroke.getKeyStroke(KeyEvent.VK_TAB, 0, true)),
-                KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, true),
-                JComponent.WHEN_FOCUSED);*/
 		
 		//RGB input field
 		textFieldRgb = new JTextField();
@@ -103,8 +93,14 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 	        }
 	    });
 		
+		//color box
+		colorBox = new JTextField();
+		colorBox.setEditable(false);
+		colorBox.setOpaque(false);
+
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
+			//set horizontal gaps between elements
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
@@ -114,12 +110,14 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(textFieldRgb, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-						.addComponent(textFieldHex, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE))
-					.addGap(18)
+						.addComponent(textFieldHex, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+						.addComponent(colorBox))
+					.addGap(19)
 					.addComponent(btnConvert)
-					.addGap(20))
+					.addGap(19))
 		);
 		gl_contentPane.setVerticalGroup(
+			//set vertical gaps between elements and set height of each element
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -131,7 +129,10 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 							.addGap(11)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblHex)
-								.addComponent(textFieldHex, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(textFieldHex, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+							.addGap(11)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(colorBox, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(41)
 							.addComponent(btnConvert, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)))
@@ -148,12 +149,24 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 		Hex inputHex = new Hex(inputHexValue);
 		outputRgb = inputHex.convert();
 
+		//if the user input a hex value
 		if(!outputRgb.equals("")) {
 			textFieldRgb.setText(outputRgb);
+			//retain the original hex input
+			textFieldHex.setText(inputHexValue);
+			colorBox.setBackground(new Color(inputHex.getRed(), inputHex.getGreen(), inputHex.getBlue()));
 		}
+
+		//if the user input an RGB value
 		if(!outputHex.equals("")) {
 			textFieldHex.setText(outputHex);
+			//retain the original RGB input
+			textFieldRgb.setText(inputRgbValue);
+			colorBox.setBackground(new Color(inputRgb.getRed(), inputRgb.getGreen(), inputRgb.getBlue()));
 		}
+
+		//paint the color box with the converted output color
+		colorBox.setOpaque(true);
 	}
 
 	public void mouseClicked(MouseEvent e) {

@@ -40,4 +40,19 @@ public class Rgb extends _Color {
 		}
 	}
 
+	@Override
+	int getRed() {
+		return Integer.parseInt(r);
+	}
+
+	@Override
+	int getGreen() {
+		return Integer.parseInt(g);
+	}
+
+	@Override
+	int getBlue() {
+		return Integer.parseInt(b);
+	}
+
 }

@@ -18,5 +18,7 @@ protected String value;
 	
 	abstract String convert();
 	abstract void parse();
-
+	abstract int getRed();
+	abstract int getGreen();
+	abstract int getBlue();
 }
