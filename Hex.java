@@ -29,14 +29,24 @@ public class Hex extends _Color {
 
 	@Override
 	void parse() {
-		//TODO: MORE PARSING
-		//IF STRING DOES NOT START WITH 0X OR 0x
-		//IF STRING DOES NOT REPRESENT VALID HEX CHARS
-		if(value.substring(0,1).equals("#")) {
-			parsedValue = "0x" + value.substring(1, value.length());//replace a leading # char with 0x
+		value = value.replace("0x", "");//ignore leading 0x, 0X, or #
+		value = value.replace("0X", "");
+		value = value.replace("#", "");
+		value = value.replaceAll("[^0-9a-fA-F]", "");//ignore char entry not within hex bounds
+		if(value.length() > 6) {
+			value = value.substring(0, 6);//ignore subsequent chars after the first 6
 		}
-		if (!value.substring(0,2).equals("0x") || !value.substring(0,2).equals("0X")) {
-			parsedValue = "0x" + value;//prepend a 0x
+		switch (value.length()) {
+			case 0:
+			case 1:
+			case 2: parsedValue = "0xFFFFFF";
+					break;
+			case 3: parsedValue = "0x000" + value;
+					break;
+			case 4:
+			case 5: parsedValue = "0x" + value.substring(0, 3);
+					break;
+			case 6: parsedValue = "0x" + value;
 		}
 	}
 
