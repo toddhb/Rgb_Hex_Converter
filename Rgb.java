@@ -24,19 +24,24 @@ public class Rgb extends _Color {
 	@Override
 	void parse() {
 		parsedValue = value.trim();//trim leading and trailing whitespace
-		parsedValue = parsedValue.replaceAll("\\s+", "");//ignore all other whitespaces
-		//TODO: MORE PARSING, such as ignore r,g,b,(,)
-		r = parsedValue.split(",")[0];
-		if (r.length() > 3) {
-			r = r.substring(0, 2);//only take first 3 digits
-		}
-		g = parsedValue.split(",")[1];
-		if (g.length() > 3) {
-			g = g.substring(0, 2);
-		}
-		b = parsedValue.split(",")[2];
-		if (b.length() > 3) {
-			b = b.substring(0, 2);
+		parsedValue = parsedValue.replaceAll("\\s+", "");//ignore all other white-spaces
+		parsedValue = parsedValue.replaceAll("[^\\d,]", "");//ignore all but number characters and commas
+		if(parsedValue.length() - parsedValue.replace(",", "").length() == 3) {//if 3 commas
+			r = parsedValue.split(",")[0];
+			r = r.length() == 0 ? "0" : r;//treat null space as a 0 by default
+			r = r.length() > 3 ? r.substring(0, 2) : r;//only take first 3 digits
+
+			g = parsedValue.split(",")[1];
+			g = g.length() == 0 ? "0" : g;
+			g = g.length() > 3 ? g.substring(0, 2) : g;
+
+			b = parsedValue.split(",")[2];
+			b = b.length() == 0 ? "0" : b;
+			b = b.length() > 3 ? b.substring(0, 2) : b;
+		} else {
+			r = "255";//if not 3 commas (3 color value parts), default to white
+			g = "255";
+			b = "255";
 		}
 	}
 
