@@ -3,7 +3,6 @@ package hexRGBConverter;
 public class Rgb extends _Color {
 	public Rgb(String input) {
 		super(input);
-		// TODO Auto-generated constructor stub
 	}
 
 	String parsedValue, r, g, b;
