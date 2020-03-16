@@ -27,6 +27,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 	public static JTextField textFieldHex;
 	public static JTextField textFieldRgb;
 	private JButton btnConvert;
+	private JLabel lblResultOfConversion;
 	private JTextField colorBox;
 
 	public GUI() {
@@ -36,6 +37,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 	private void initializeGUI() {
 		JLabel lblHex = new JLabel("Hexadecimal: ");		
 		JLabel lblRgb = new JLabel("RGB: ");
+		lblResultOfConversion = new JLabel("xxxx");
 
 		setResizable(false);
 		setTitle("Hex | RGB Converter");
@@ -111,7 +113,8 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addComponent(textFieldRgb, GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
 						.addComponent(textFieldHex, GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
-						.addComponent(colorBox))
+						.addComponent(colorBox)
+						.addComponent(lblResultOfConversion))
 					.addGap(19)
 					.addComponent(btnConvert)
 					.addGap(19))
@@ -130,6 +133,9 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblHex)
 								.addComponent(textFieldHex, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+							.addGap(11)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+									.addComponent(lblResultOfConversion))
 							.addGap(11)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(colorBox, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)))
@@ -151,17 +157,19 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 
 		//if the user input a hex value
 		if(!outputRgb.equals("")) {
-			textFieldRgb.setText(outputRgb);
+			textFieldRgb.setText("");
 			//retain the original hex input
-			textFieldHex.setText(inputHexValue);
+			textFieldHex.setText("");
+			lblResultOfConversion.setText(inputHexValue + " is " + outputRgb);
 			colorBox.setBackground(new Color(inputHex.getRed(), inputHex.getGreen(), inputHex.getBlue()));
 		}
 
 		//if the user input an RGB value
 		if(!outputHex.equals("")) {
-			textFieldHex.setText(outputHex);
+			textFieldHex.setText("");
 			//retain the original RGB input
-			textFieldRgb.setText(inputRgbValue);
+			textFieldRgb.setText("");
+			lblResultOfConversion.setText(inputRgbValue + " is " + outputHex);
 			colorBox.setBackground(new Color(inputRgb.getRed(), inputRgb.getGreen(), inputRgb.getBlue()));
 		}
 
