@@ -37,7 +37,7 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 	private void initializeGUI() {
 		JLabel lblHex = new JLabel("Hexadecimal: ");		
 		JLabel lblRgb = new JLabel("RGB: ");
-		lblResultOfConversion = new JLabel("xxxx");
+		lblResultOfConversion = new JLabel("");
 
 		setResizable(false);
 		setTitle("Hex | RGB Converter");
@@ -157,21 +157,20 @@ public class GUI extends JFrame implements ActionListener, MouseListener{
 
 		//if the user input a hex value
 		if(!outputRgb.equals("")) {
-			textFieldRgb.setText("");
-			//retain the original hex input
-			textFieldHex.setText("");
+
 			lblResultOfConversion.setText(inputHexValue + " is " + outputRgb);
 			colorBox.setBackground(new Color(inputHex.getRed(), inputHex.getGreen(), inputHex.getBlue()));
 		}
 
 		//if the user input an RGB value
 		if(!outputHex.equals("")) {
-			textFieldHex.setText("");
-			//retain the original RGB input
-			textFieldRgb.setText("");
 			lblResultOfConversion.setText(inputRgbValue + " is " + outputHex);
 			colorBox.setBackground(new Color(inputRgb.getRed(), inputRgb.getGreen(), inputRgb.getBlue()));
 		}
+
+		//reset the text fields to prepare for another entry
+		textFieldRgb.setText("");
+		textFieldHex.setText("");
 
 		//paint the color box with the converted output color
 		colorBox.setOpaque(true);
