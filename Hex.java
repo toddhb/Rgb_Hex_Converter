@@ -47,6 +47,7 @@ public class Hex extends _Color {
 			case 5: parsedValue = "0x" + value.substring(0, 3);
 					break;
 			case 6: parsedValue = "0x" + value;
+					break;
 		}
 	}
 

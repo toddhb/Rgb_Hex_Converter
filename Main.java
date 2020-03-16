@@ -1,4 +1,4 @@
-/*Chat Application
+/*RGB Hext Converter
 Author: Todd Brochu
 */
 
