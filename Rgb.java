@@ -10,7 +10,6 @@ public class Rgb extends _Color {
 	@Override
 	String convert() {
 		String hexValue = "";
-
 		if(!value.equals("")) {
 			//parse the input value so that it becomes a well-formed RGB
 			parse();
@@ -25,7 +24,8 @@ public class Rgb extends _Color {
 		parsedValue = value.trim();//trim leading and trailing whitespace
 		parsedValue = parsedValue.replaceAll("\\s+", "");//ignore all other white-spaces
 		parsedValue = parsedValue.replaceAll("[^\\d,]", "");//ignore all but number characters and commas
-		if(parsedValue.length() - parsedValue.replace(",", "").length() == 3) {//if 3 commas
+
+		if(parsedValue.length() - parsedValue.replace(",", "").length() == 2) {//if 2 commas
 			r = parsedValue.split(",")[0];
 			r = r.length() == 0 ? "0" : r;//treat null space as a 0 by default
 			r = r.length() > 3 ? r.substring(0, 2) : r;//only take first 3 digits
